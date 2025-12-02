@@ -329,39 +329,3 @@ git config --global alias.st 'status'
 git config --global alias.co 'checkout'
 git config --global alias.br 'branch'
 ```
-
----
-
-**Все скриншоты сохранены в папке `screenshots/` и приложены к отчету.**
-```
-
-## Инструкция по использованию:
-
-1. **Скопируйте** этот текст в файл `README.md` в вашем репозитории
-2. **Замените** информацию в квадратных скобках `[]` на вашу
-3. **Добавьте** реальные скриншоты в папку `screenshots/`
-4. **Обновите** описание, если вы делали что-то по-другому
-5. **Дополните** выводами и наблюдениями из вашей работы
-
-## Структура папок:
-```
-your-repository/
-├── lab9_git/
-│   ├── README.md          # этот файл
-│   ├── sort.c             # файл с сортировкой
-│   ├── file1.txt          # файл из ветки mybranch
-│   ├── file2.txt          # файл из ветки main
-│   ├── greeting.txt       # файл для демонстрации merge
-│   ├── file.txt           # файл с простым конфликтом
-│   ├── mergesort.py       # файл со сложным конфликтом
-│   └── screenshots/       # папка со скриншотами
-│       ├── git_config.png
-│       ├── first_commit.png
-│       ├── branch_graph.png
-│       ├── two_states.png
-│       ├── fast_forward.png
-│       ├── merge_conflict.png
-│       └── merged_result.png
-```
-
-Такой README.md будет хорошо структурирован, информативен и покажет все этапы выполнения лабораторной работы.
