@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//Функция перестановки
 void swap(int* arr, int i, int j) {
     int temp = arr[i];
     arr[i] = arr[j];
