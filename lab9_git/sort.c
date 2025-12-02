@@ -19,7 +19,7 @@ void bubbleSort(int arr[], int n) {
 }
 
 int main() {
-    int arr[] = { 5, 6, 1, 3 };
+    int arr[] = { 4, 2, 5, 1 };
     int n = sizeof(arr) / sizeof(arr[0]);
 
     // Calling bubble sort on array arr
