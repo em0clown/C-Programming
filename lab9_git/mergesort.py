@@ -1,29 +1,36 @@
 def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    
-    mid = len(arr) // 2
-    left = arr[:mid]
-    right = arr[mid:]
-    
-    left = merge_sort(left)
-    right = merge_sort(right)
-    
-    return merge(left, right)
-
-def merge(left, right):
-    result = []
-    i = j = 0
-    
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            result.append(left[i])
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+        
+        merge_sort(left_half)
+        merge_sort(right_half)
+        
+        i = j = k = 0
+        
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+        
+        while i < len(left_half):
+            arr[k] = left_half[i]
             i += 1
-        else:
-            result.append(right[j])
+            k += 1
+        
+        while j < len(right_half):
+            arr[k] = right_half[j]
             j += 1
-    
-    result.extend(left[i:])
-    result.extend(right[j:])
-    
-    return result
+            k += 1
+
+# Тестирование алгоритма
+if __name__ == "__main__":
+    data = [38, 27, 43, 3, 9, 82, 10]
+    print(f"Исходный массив: {data}")
+    merge_sort(data)
+    print(f"Отсортированный массив: {data}")
