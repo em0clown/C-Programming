@@ -329,3 +329,36 @@ git config --global alias.st 'status'
 git config --global alias.co 'checkout'
 git config --global alias.br 'branch'
 ```
+
+```mermaid
+gitGraph
+    commit id: "1: Настройка Git"
+    commit id: "2: Создание sort.c"
+    commit id: "3: Добавление комментариев"
+    branch mybranch
+    checkout mybranch
+    commit id: "4: Добавлен file1.txt"
+    checkout main
+    commit id: "5: Добавлен file2.txt"
+    checkout main
+    commit id: "6: Добавлена функция main()"
+    branch feature/uppercase
+    checkout feature/uppercase
+    commit id: "7: Конвертация в верхний регистр"
+    checkout main
+    merge feature/uppercase id: "8" tag: "Fast-forward merge"
+    commit id: "9: Изменение файла в main"
+    branch branch1
+    checkout branch1
+    commit id: "10: Изменение файла в branch1"
+    checkout main
+    merge branch1 id: "11" tag: "Конфликт! Разрешен вручную"
+    commit id: "12: Результат слияния"
+    branch Mergesort-Impl
+    checkout Mergesort-Impl
+    commit id: "13: Функциональная реализация"
+    checkout main
+    commit id: "14: In-place реализация"
+    merge Mergesort-Impl id: "15" tag: "Сложный конфликт! Гибридное решение"
+    commit id: "16: Финальная версия"
+```
