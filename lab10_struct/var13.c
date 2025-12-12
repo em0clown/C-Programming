@@ -13,5 +13,4 @@ int main(){
     scanf("%d", &M);
     printf("Введите параметры параболы (a, b, c): ");
     scanf("%d, %d, %d", &a, &b, &c);
-    
 }
