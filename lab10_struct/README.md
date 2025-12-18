@@ -18,10 +18,10 @@
 
 ### 📁 Файловая структура:
 
-- [main.c](#main.c)
-- [parabola_function.c](#parabola_function.c)
-- [parabola.h](#parabola.h)
-- [README.md](#README.md)
+- [main.c](/lab10_struct/main.c)
+- [parabola_function.c](/lab10_struct/parabola_function.c)
+- [parabola.h](/lab10_struct/parabola.h)
+- [README.md](/lab10_struct/README.md)
 
 ### 📊 Структура данных:
 ```c
