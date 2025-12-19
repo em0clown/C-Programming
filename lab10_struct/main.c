@@ -3,39 +3,33 @@
 int main() {
     int M;
     
-    printf("Введите количество парабол M: ");
+    printf("Сколько парабол? ");
     scanf("%d", &M);
     
-    if (M <= 0) {
-        printf("Количество парабол должно быть положительным!\n");
-        return 1;
-    }
-    
     Parabola* parabolas = createParabolas(M);
-    int k = countParabolasWithMin(parabolas, M);
-    printf("\nКоличество парабол с минимумом: %d\n", k);
+    
+    int k = countParabolaMin(parabolas, M);
+    printf("\nПарабол с минимумом: %d\n", k);
     
     if (k > 0) {
-        int highestIndex = findHighestMinParabola(parabolas, M);
+        int index = findHighMinParabola(parabolas, M);
+        printf("\nПарабола с самым высоким минимумом:\n");
+        printf("№%d: y = %.1fx²", index + 1, parabolas[index].a);
         
-        printf("\nПарабола с наибольшим минимумом:\n");
-        printf("Индекс: %d\n", highestIndex + 1);
-        printf("Коэффициенты: a = %.2lf, b = %.2lf, c = %.2lf\n", 
-               parabolas[highestIndex].a, 
-               parabolas[highestIndex].b, 
-               parabolas[highestIndex].c);
-        printf("Значение минимума: %.2lf\n", getMinValue(parabolas[highestIndex]));
-    } else {
-        printf("Нет парабол с минимумом\n");
+        if (parabolas[index].b != 0) {
+            if (parabolas[index].b > 0) printf(" + %.1fx", parabolas[index].b);
+            else printf(" - %.1fx", -parabolas[index].b);
+        }
+        
+        if (parabolas[index].c != 0) {
+            if (parabolas[index].c > 0) printf(" + %.1f", parabolas[index].c);
+            else printf(" - %.1f", -parabolas[index].c);
+        }
+        
+        printf("\nМинимум = %.2f\n", getMinValue(parabolas[index]));
     }
     
     free(parabolas);
-    
-    Parabola demo = createParabola(1, -2, 1);
-    printf("Создана парабола: y = %.1lfx² + %.1lfx + %.1lf\n", 
-           demo.a, demo.b, demo.c);
-    printf("Имеет минимум: %s\n", hasMinimum(demo) ? "Да" : "Нет");
-    printf("Значение минимума: %.2lf\n", getMinValue(demo));
     
     return 0;
 }
