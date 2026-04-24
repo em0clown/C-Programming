@@ -1,0 +1,5 @@
+/Users/george/C-Programming/lab12/build/CMakeFiles/smarthome.dir
+/Users/george/C-Programming/lab12/build/CMakeFiles/smarthome_app.dir
+/Users/george/C-Programming/lab12/build/CMakeFiles/run.dir
+/Users/george/C-Programming/lab12/build/CMakeFiles/edit_cache.dir
+/Users/george/C-Programming/lab12/build/CMakeFiles/rebuild_cache.dir

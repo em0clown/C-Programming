@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libsmarthome.a CMakeFiles/smarthome.dir/src/smarthome.c.o
+/usr/bin/ranlib lib/libsmarthome.a
