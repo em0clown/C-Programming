@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/george/C-Programming/lab16/src/task5'
+relocations:     []
+...
