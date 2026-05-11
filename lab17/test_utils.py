@@ -1,5 +1,5 @@
 import pytest
-from utils import format_username
+from lab17.utils import format_username
 
 def test_format_username_standard():
     assert format_username("george", "kolesov") == "George Kolesov"
