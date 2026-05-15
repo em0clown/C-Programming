@@ -30,7 +30,6 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) window.close();
 
-            // 1. Горячие клавиши (Инструменты, Фильтры, Размер)
             if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
                     case sf::Keyboard::B: currentTool = Tool::BRUSH; break;
@@ -47,7 +46,6 @@ int main() {
                     case sf::Keyboard::Equal: brushRadius = std::min(20, brushRadius + 1); break;
                     case sf::Keyboard::Hyphen: brushRadius = std::max(1, brushRadius - 1); break;
 
-                    // Выбор цвета 0-9
                     case sf::Keyboard::Num0: case sf::Keyboard::Num1: 
                     case sf::Keyboard::Num9: {
                         int idx = event.key.code - sf::Keyboard::Num0;
@@ -60,7 +58,6 @@ int main() {
                 }
             }
 
-            // 2. Логика палитры (клик по квадратикам)
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mouse = sf::Mouse::getPosition(window);
                 int paletteY = HEIGHT * PIXEL_SIZE + 50;
@@ -75,7 +72,6 @@ int main() {
                 }
             }
 
-            // 3. Логика рисования на холсте
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mouse = sf::Mouse::getPosition(window);
                 if (mouse.y < HEIGHT * PIXEL_SIZE) {
@@ -112,7 +108,6 @@ int main() {
         window.clear(sf::Color(200, 200, 200));
         renderToWindow(window, canvas);
 
-        // Отрисовка UI палитры
         for (size_t i = 0; i < palette.size(); ++i) {
             sf::RectangleShape box(sf::Vector2f(30, 30));
             box.setFillColor(palette[i]);

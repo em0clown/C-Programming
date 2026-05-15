@@ -5,26 +5,22 @@
 
 extern std::stack<Canvas> undoStack;
 
-// Сохранение текущего состояния холста в стек
 void saveToUndo(const Canvas& canvas) {
     undoStack.push(canvas);
 }
 
-// Очистка холста белым цветом
 void clearCanvas(Canvas& canvas) {
     for (auto& row : canvas) {
         std::fill(row.begin(), row.end(), sf::Color::White);
     }
 }
 
-// Рисование одиночного пикселя с проверкой границ
 void drawPixel(Canvas& canvas, int x, int y, const sf::Color& color) {
     if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT) {
         canvas[y][x] = color;
     }
 }
 
-// Кисть: рисует заполненный круг
 void drawBrush(Canvas& canvas, int x, int y, const sf::Color& color, int radius) {
     for (int dy = -radius; dy <= radius; ++dy) {
         for (int dx = -radius; dx <= radius; ++dx) {
@@ -35,7 +31,6 @@ void drawBrush(Canvas& canvas, int x, int y, const sf::Color& color, int radius)
     }
 }
 
-// Прямоугольник: находит границы по двум точкам
 void drawRectangle(Canvas& canvas, int x1, int y1, int x2, int y2, const sf::Color& color) {
     int left = std::min(x1, x2);
     int right = std::max(x1, x2);
@@ -49,7 +44,6 @@ void drawRectangle(Canvas& canvas, int x1, int y1, int x2, int y2, const sf::Col
     }
 }
 
-// Линия: целочисленный алгоритм Брезенхема
 void drawLine(Canvas& canvas, int x1, int y1, int x2, int y2, const sf::Color& color) {
     int dx = std::abs(x2 - x1);
     int dy = -std::abs(y2 - y1);
@@ -66,7 +60,6 @@ void drawLine(Canvas& canvas, int x1, int y1, int x2, int y2, const sf::Color& c
     }
 }
 
-// Отмена: восстановление холста из стека
 void undo(Canvas& canvas) {
     if (!undoStack.empty()) {
         canvas = undoStack.top();
@@ -74,7 +67,6 @@ void undo(Canvas& canvas) {
     }
 }
 
-// Фильтр: оттенки серого через std::transform
 void applyGrayscale(Canvas& canvas) {
     saveToUndo(canvas);
     for (auto& row : canvas) {
@@ -85,7 +77,6 @@ void applyGrayscale(Canvas& canvas) {
     }
 }
 
-// Фильтр: инверсия цветов
 void applyNegative(Canvas& canvas) {
     saveToUndo(canvas);
     for (auto& row : canvas) {
@@ -95,7 +86,6 @@ void applyNegative(Canvas& canvas) {
     }
 }
 
-// Фильтр: размытие 3x3
 void applyBlur(Canvas& canvas) {
     saveToUndo(canvas);
     Canvas original = canvas;
@@ -113,7 +103,6 @@ void applyBlur(Canvas& canvas) {
     }
 }
 
-// Отрисовка данных на окно SFML
 void renderToWindow(sf::RenderWindow& window, const Canvas& canvas) {
     static sf::Image image;
     static sf::Texture texture;
