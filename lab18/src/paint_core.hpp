@@ -15,8 +15,8 @@ void drawBrush(Canvas& canvas, int x, int y, const sf::Color& color, int radius)
 
 void drawRectangle(Canvas& canvas, int x1, int y1, int x2, int y2, const sf::Color& color);
 void drawLine(Canvas& canvas, int x1, int y1, int x2, int y2, const sf::Color& color);
-void undo(Canvas& canvas);
-void saveToUndo(const Canvas& canvas);
+void undo(Canvas& canvas);          
+void saveToUndo(const Canvas& canvas);   
 
 void applyGrayscale(Canvas& canvas);
 void applyNegative(Canvas& canvas);
