@@ -114,6 +114,7 @@ void* server(void* arg) {
     }
 }
 
+#ifndef CHECK_TESTING
 int main() {
     srand(time(NULL));
     
@@ -134,3 +135,4 @@ int main() {
     printf("Zavershenie raboty.\n");
     return 0;
 }
+#endif
