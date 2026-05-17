@@ -21,7 +21,7 @@ https://github.com/em0clown/C-Programming/tree/main/lab15
 https://github.com/em0clown/C-Programming/tree/main/lab16
 
 **Лабораторная работа 17 (Многопоточные программы):** 
-
+https://github.com/em0clown/C-Programming/tree/main/lab17
 
 **Лабораторная работа 18 (Тестирование ПО. Качество кода):** 
 https://github.com/em0clown/C-Programming/tree/main/lab17
