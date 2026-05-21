@@ -129,29 +129,101 @@ poker/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/build
 .PHONY : poker/fast
 
-src/poker.o: src/poker.cpp.o
-.PHONY : src/poker.o
+src/game_state.o: src/game_state.cpp.o
+.PHONY : src/game_state.o
 
 # target to build an object file
-src/poker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/poker.cpp.o
-.PHONY : src/poker.cpp.o
+src/game_state.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/game_state.cpp.o
+.PHONY : src/game_state.cpp.o
 
-src/poker.i: src/poker.cpp.i
-.PHONY : src/poker.i
+src/game_state.i: src/game_state.cpp.i
+.PHONY : src/game_state.i
 
 # target to preprocess a source file
-src/poker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/poker.cpp.i
-.PHONY : src/poker.cpp.i
+src/game_state.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/game_state.cpp.i
+.PHONY : src/game_state.cpp.i
 
-src/poker.s: src/poker.cpp.s
-.PHONY : src/poker.s
+src/game_state.s: src/game_state.cpp.s
+.PHONY : src/game_state.s
 
 # target to generate assembly for a file
-src/poker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/poker.cpp.s
-.PHONY : src/poker.cpp.s
+src/game_state.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/game_state.cpp.s
+.PHONY : src/game_state.cpp.s
+
+src/game_view.o: src/game_view.cpp.o
+.PHONY : src/game_view.o
+
+# target to build an object file
+src/game_view.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/game_view.cpp.o
+.PHONY : src/game_view.cpp.o
+
+src/game_view.i: src/game_view.cpp.i
+.PHONY : src/game_view.i
+
+# target to preprocess a source file
+src/game_view.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/game_view.cpp.i
+.PHONY : src/game_view.cpp.i
+
+src/game_view.s: src/game_view.cpp.s
+.PHONY : src/game_view.s
+
+# target to generate assembly for a file
+src/game_view.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/game_view.cpp.s
+.PHONY : src/game_view.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+src/poker_engine.o: src/poker_engine.cpp.o
+.PHONY : src/poker_engine.o
+
+# target to build an object file
+src/poker_engine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/poker_engine.cpp.o
+.PHONY : src/poker_engine.cpp.o
+
+src/poker_engine.i: src/poker_engine.cpp.i
+.PHONY : src/poker_engine.i
+
+# target to preprocess a source file
+src/poker_engine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/poker_engine.cpp.i
+.PHONY : src/poker_engine.cpp.i
+
+src/poker_engine.s: src/poker_engine.cpp.s
+.PHONY : src/poker_engine.s
+
+# target to generate assembly for a file
+src/poker_engine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/src/poker_engine.cpp.s
+.PHONY : src/poker_engine.cpp.s
 
 # Help Target
 help:
@@ -162,9 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... poker"
-	@echo "... src/poker.o"
-	@echo "... src/poker.i"
-	@echo "... src/poker.s"
+	@echo "... src/game_state.o"
+	@echo "... src/game_state.i"
+	@echo "... src/game_state.s"
+	@echo "... src/game_view.o"
+	@echo "... src/game_view.i"
+	@echo "... src/game_view.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/poker_engine.o"
+	@echo "... src/poker_engine.i"
+	@echo "... src/poker_engine.s"
 .PHONY : help
 
 

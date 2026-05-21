@@ -69,31 +69,92 @@ include CMakeFiles/poker.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/poker.dir/flags.make
 
-CMakeFiles/poker.dir/src/poker.cpp.o: CMakeFiles/poker.dir/flags.make
-CMakeFiles/poker.dir/src/poker.cpp.o: /home/emoclown/Ci/C-Programming/poker/src/poker.cpp
-CMakeFiles/poker.dir/src/poker.cpp.o: CMakeFiles/poker.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/poker.dir/src/poker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/poker.dir/src/poker.cpp.o -MF CMakeFiles/poker.dir/src/poker.cpp.o.d -o CMakeFiles/poker.dir/src/poker.cpp.o -c /home/emoclown/Ci/C-Programming/poker/src/poker.cpp
+CMakeFiles/poker.dir/src/game_state.cpp.o: CMakeFiles/poker.dir/flags.make
+CMakeFiles/poker.dir/src/game_state.cpp.o: /home/emoclown/Ci/C-Programming/poker/src/game_state.cpp
+CMakeFiles/poker.dir/src/game_state.cpp.o: CMakeFiles/poker.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/poker.dir/src/game_state.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/poker.dir/src/game_state.cpp.o -MF CMakeFiles/poker.dir/src/game_state.cpp.o.d -o CMakeFiles/poker.dir/src/game_state.cpp.o -c /home/emoclown/Ci/C-Programming/poker/src/game_state.cpp
 
-CMakeFiles/poker.dir/src/poker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/poker.dir/src/poker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emoclown/Ci/C-Programming/poker/src/poker.cpp > CMakeFiles/poker.dir/src/poker.cpp.i
+CMakeFiles/poker.dir/src/game_state.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/poker.dir/src/game_state.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emoclown/Ci/C-Programming/poker/src/game_state.cpp > CMakeFiles/poker.dir/src/game_state.cpp.i
 
-CMakeFiles/poker.dir/src/poker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/poker.dir/src/poker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emoclown/Ci/C-Programming/poker/src/poker.cpp -o CMakeFiles/poker.dir/src/poker.cpp.s
+CMakeFiles/poker.dir/src/game_state.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/poker.dir/src/game_state.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emoclown/Ci/C-Programming/poker/src/game_state.cpp -o CMakeFiles/poker.dir/src/game_state.cpp.s
+
+CMakeFiles/poker.dir/src/game_view.cpp.o: CMakeFiles/poker.dir/flags.make
+CMakeFiles/poker.dir/src/game_view.cpp.o: /home/emoclown/Ci/C-Programming/poker/src/game_view.cpp
+CMakeFiles/poker.dir/src/game_view.cpp.o: CMakeFiles/poker.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/poker.dir/src/game_view.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/poker.dir/src/game_view.cpp.o -MF CMakeFiles/poker.dir/src/game_view.cpp.o.d -o CMakeFiles/poker.dir/src/game_view.cpp.o -c /home/emoclown/Ci/C-Programming/poker/src/game_view.cpp
+
+CMakeFiles/poker.dir/src/game_view.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/poker.dir/src/game_view.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emoclown/Ci/C-Programming/poker/src/game_view.cpp > CMakeFiles/poker.dir/src/game_view.cpp.i
+
+CMakeFiles/poker.dir/src/game_view.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/poker.dir/src/game_view.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emoclown/Ci/C-Programming/poker/src/game_view.cpp -o CMakeFiles/poker.dir/src/game_view.cpp.s
+
+CMakeFiles/poker.dir/src/main.cpp.o: CMakeFiles/poker.dir/flags.make
+CMakeFiles/poker.dir/src/main.cpp.o: /home/emoclown/Ci/C-Programming/poker/src/main.cpp
+CMakeFiles/poker.dir/src/main.cpp.o: CMakeFiles/poker.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/poker.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/poker.dir/src/main.cpp.o -MF CMakeFiles/poker.dir/src/main.cpp.o.d -o CMakeFiles/poker.dir/src/main.cpp.o -c /home/emoclown/Ci/C-Programming/poker/src/main.cpp
+
+CMakeFiles/poker.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/poker.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emoclown/Ci/C-Programming/poker/src/main.cpp > CMakeFiles/poker.dir/src/main.cpp.i
+
+CMakeFiles/poker.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/poker.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emoclown/Ci/C-Programming/poker/src/main.cpp -o CMakeFiles/poker.dir/src/main.cpp.s
+
+CMakeFiles/poker.dir/src/poker_engine.cpp.o: CMakeFiles/poker.dir/flags.make
+CMakeFiles/poker.dir/src/poker_engine.cpp.o: /home/emoclown/Ci/C-Programming/poker/src/poker_engine.cpp
+CMakeFiles/poker.dir/src/poker_engine.cpp.o: CMakeFiles/poker.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/poker.dir/src/poker_engine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/poker.dir/src/poker_engine.cpp.o -MF CMakeFiles/poker.dir/src/poker_engine.cpp.o.d -o CMakeFiles/poker.dir/src/poker_engine.cpp.o -c /home/emoclown/Ci/C-Programming/poker/src/poker_engine.cpp
+
+CMakeFiles/poker.dir/src/poker_engine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/poker.dir/src/poker_engine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/emoclown/Ci/C-Programming/poker/src/poker_engine.cpp > CMakeFiles/poker.dir/src/poker_engine.cpp.i
+
+CMakeFiles/poker.dir/src/poker_engine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/poker.dir/src/poker_engine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/emoclown/Ci/C-Programming/poker/src/poker_engine.cpp -o CMakeFiles/poker.dir/src/poker_engine.cpp.s
 
 # Object files for target poker
 poker_OBJECTS = \
-"CMakeFiles/poker.dir/src/poker.cpp.o"
+"CMakeFiles/poker.dir/src/game_state.cpp.o" \
+"CMakeFiles/poker.dir/src/game_view.cpp.o" \
+"CMakeFiles/poker.dir/src/main.cpp.o" \
+"CMakeFiles/poker.dir/src/poker_engine.cpp.o"
 
 # External object files for target poker
 poker_EXTERNAL_OBJECTS =
 
-poker: CMakeFiles/poker.dir/src/poker.cpp.o
+poker: CMakeFiles/poker.dir/src/game_state.cpp.o
+poker: CMakeFiles/poker.dir/src/game_view.cpp.o
+poker: CMakeFiles/poker.dir/src/main.cpp.o
+poker: CMakeFiles/poker.dir/src/poker_engine.cpp.o
 poker: CMakeFiles/poker.dir/build.make
+poker: /usr/lib/x86_64-linux-gnu/libgtk-3.so
+poker: /usr/lib/x86_64-linux-gnu/libgdk-3.so
+poker: /usr/lib/x86_64-linux-gnu/libz.so
+poker: /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so
+poker: /usr/lib/x86_64-linux-gnu/libpango-1.0.so
+poker: /usr/lib/x86_64-linux-gnu/libharfbuzz.so
+poker: /usr/lib/x86_64-linux-gnu/libatk-1.0.so
+poker: /usr/lib/x86_64-linux-gnu/libcairo-gobject.so
+poker: /usr/lib/x86_64-linux-gnu/libcairo.so
+poker: /usr/lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so
+poker: /usr/lib/x86_64-linux-gnu/libgio-2.0.so
+poker: /usr/lib/x86_64-linux-gnu/libgobject-2.0.so
+poker: /usr/lib/x86_64-linux-gnu/libglib-2.0.so
 poker: CMakeFiles/poker.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable poker"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable poker"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/poker.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

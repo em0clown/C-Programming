@@ -1,15 +1,22 @@
-cmake_minimum_required(VERSION 3.14)
-project(PokerGame)
+cmake_minimum_required(VERSION 3.28)
+project(poker LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
 
-add_executable(poker src/poker.cpp)
+file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-target_include_directories(poker PRIVATE ${GTK3_INCLUDE_DIRS})
-target_link_libraries(poker ${GTK3_LIBRARIES})
+add_executable(poker ${SOURCES})
 
-message(STATUS "Poker Game ready")
+target_include_directories(poker PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+
+target_link_libraries(poker PRIVATE PkgConfig::GTK3)
+
+if(MSVC)
+    target_compile_options(poker PRIVATE /W4)
+else()
+    target_compile_options(poker PRIVATE -Wall -Wextra -Wpedantic)
+endif()

@@ -81,12 +81,12 @@ clean: CMakeFiles/poker.dir/clean
 CMakeFiles/poker.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/poker.dir/build.make CMakeFiles/poker.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=1,2 "Built target poker"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/emoclown/Ci/C-Programming/poker/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target poker"
 .PHONY : CMakeFiles/poker.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/poker.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/emoclown/Ci/C-Programming/poker/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/emoclown/Ci/C-Programming/poker/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/poker.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/emoclown/Ci/C-Programming/poker/build/CMakeFiles 0
 .PHONY : CMakeFiles/poker.dir/rule
