@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Инициализация статических членов
 GameState* GameView::state = nullptr;
 GtkWidget* GameView::drawingArea = nullptr;
 GtkWidget* GameView::statusLabel = nullptr;
@@ -40,7 +39,7 @@ void GameView::drawCard(cairo_t *cr, double x, double y, double w, double h, Car
         if (card.suit == 0 || card.suit == 1) cairo_set_source_rgb(cr, 0.8, 0, 0);
         else cairo_set_source_rgb(cr, 0, 0, 0);
 
-        cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+        cairo_select_font_face(cr, "Arial", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
         cairo_set_font_size(cr, 18); cairo_move_to(cr, x + 8, y + 22); cairo_show_text(cr, rank.c_str());
         cairo_set_font_size(cr, 32); cairo_move_to(cr, x + w/2 - 14, y + h/2 + 12); cairo_show_text(cr, suit.c_str());
     } else {
@@ -55,9 +54,9 @@ gboolean GameView::onDraw(GtkWidget *widget, cairo_t *cr, gpointer) {
 
     if (state->currentMode == MENU) {
         cairo_set_source_rgb(cr, 0.1, 0.15, 0.2); cairo_rectangle(cr, 0, 0, w, h); cairo_fill(cr);
-        cairo_set_source_rgb(cr, 1, 1, 1); cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+        cairo_set_source_rgb(cr, 1, 1, 1); cairo_select_font_face(cr, "Arial", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
         cairo_set_font_size(cr, 26); cairo_move_to(cr, w/2 - 190, h/2 - 20);
-        cairo_show_text(cr, "♠ ПОКЕР ХЕДЗ-АП ДЛЯ ДВОИХ ♥");
+        cairo_show_text(cr, "♠ ПОКЕР ДЛЯ ДВОИХ ♥");
         cairo_set_font_size(cr, 14); cairo_move_to(cr, w/2 - 150, h/2 + 20);
         cairo_show_text(cr, "Выберите режим игры на панели меню сверху.");
         return FALSE;

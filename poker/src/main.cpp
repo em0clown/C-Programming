@@ -4,8 +4,10 @@
 #include <random>
 #include "game_state.h"
 #include "game_view.h"
+#include <clocale>
 
 int main(int argc, char *argv[]) {
+    std::setlocale(LC_ALL, "");
     srand(time(nullptr));
     gtk_init(&argc, &argv);
 
