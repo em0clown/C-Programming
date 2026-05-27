@@ -6,7 +6,7 @@ using namespace std;
 
 string PokerEngine::getHandRankName(int rank) {
     static const vector<string> names = {
-        "Ошибка", "Старшая карта", "Пара", "Две пары", 
+        "Ошибка", "Старшая карта", "Пара", "Две пары",
         "Сет", "Стрит", "Флеш", "Фулл-хаус", "Каре", "Стрит-флеш"
     };
     return (rank >= 1 && rank <= 9) ? names[rank] : "Неизвестно";
@@ -20,11 +20,15 @@ void PokerEngine::sortCards(vector<Card>& cards) {
 
 bool PokerEngine::isFlush(const vector<Card>& cards, vector<int>& flushRanks) {
     int suitCount[4] = {0, 0, 0, 0};
-    for (const auto& c : cards) suitCount[c.suit]++;
+    for (const auto& c : cards) {
+        suitCount[c.suit]++;
+    }
     for (int s = 0; s < 4; s++) {
         if (suitCount[s] >= 5) {
             for (const auto& c : cards) {
-                if (c.suit == s) flushRanks.push_back(c.rank);
+                if (c.suit == s) {
+                    flushRanks.push_back(c.rank);
+                }
             }
             sort(flushRanks.begin(), flushRanks.end(), greater<int>());
             return true;
@@ -50,7 +54,7 @@ bool PokerEngine::isStraight(const vector<int>& ranks, vector<int>& straightCard
         count(uniqueRanks.begin(), uniqueRanks.end(), 3) &&
         count(uniqueRanks.begin(), uniqueRanks.end(), 4) &&
         count(uniqueRanks.begin(), uniqueRanks.end(), 5)) {
-        straightCards.push_back(5); 
+        straightCards.push_back(5);
         return true;
     }
     return false;
@@ -82,57 +86,81 @@ HandRank PokerEngine::evaluateHand(const vector<Card>& hole, const vector<Card>&
     bool straight = isStraight(ranks, straightRanks);
 
     if (flush && straight) {
-        result.rank = 9; result.name = "Стрит-флеш";
-        result.kickers = straightRanks; return result;
+        result.rank = 9;
+        result.name = "Стрит-флеш";
+        result.kickers = straightRanks;
+        return result;
     }
     if (freq[0].second == 4) {
-        result.rank = 8; result.name = "Каре";
+        result.rank = 8;
+        result.name = "Каре";
         result.kickers.push_back(freq[0].first);
         result.kickers.push_back(freq[1].first);
         return result;
     }
     if (freq[0].second == 3 && freq.size() > 1 && freq[1].second >= 2) {
-        result.rank = 7; result.name = "Фулл-хаус";
+        result.rank = 7;
+        result.name = "Фулл-хаус";
         result.kickers.push_back(freq[0].first);
         result.kickers.push_back(freq[1].first);
         return result;
     }
     if (flush) {
-        result.rank = 6; result.name = "Флеш";
-        result.kickers = flushRanks; return result;
+        result.rank = 6;
+        result.name = "Флеш";
+        result.kickers = flushRanks;
+        return result;
     }
     if (straight) {
-        result.rank = 5; result.name = "Стрит";
-        result.kickers = straightRanks; return result;
+        result.rank = 5;
+        result.name = "Стрит";
+        result.kickers = straightRanks;
+        return result;
     }
     if (freq[0].second == 3) {
-        result.rank = 4; result.name = "Сет";
+        result.rank = 4;
+        result.name = "Сет";
         result.kickers.push_back(freq[0].first);
-        for (size_t i = 1; i < freq.size(); i++) result.kickers.push_back(freq[i].first);
+        for (size_t i = 1; i < freq.size(); i++) {
+            result.kickers.push_back(freq[i].first);
+        }
         return result;
     }
     if (freq[0].second == 2 && freq.size() > 1 && freq[1].second == 2) {
-        result.rank = 3; result.name = "Две пары";
+        result.rank = 3;
+        result.name = "Две пары";
         result.kickers.push_back(freq[0].first);
         result.kickers.push_back(freq[1].first);
-        for (size_t i = 2; i < freq.size(); i++) result.kickers.push_back(freq[i].first);
+        for (size_t i = 2; i < freq.size(); i++) {
+            result.kickers.push_back(freq[i].first);
+        }
         return result;
     }
     if (freq[0].second == 2) {
-        result.rank = 2; result.name = "Пара";
+        result.rank = 2;
+        result.name = "Пара";
         result.kickers.push_back(freq[0].first);
-        for (size_t i = 1; i < freq.size(); i++) result.kickers.push_back(freq[i].first);
+        for (size_t i = 1; i < freq.size(); i++) {
+            result.kickers.push_back(freq[i].first);
+        }
         return result;
     }
-    result.rank = 1; result.name = "Старшая карта";
-    for (size_t i = 0; i < allCards.size() && i < 5; i++) result.kickers.push_back(allCards[i].rank);
+    result.rank = 1;
+    result.name = "Старшая карта";
+    for (size_t i = 0; i < allCards.size() && i < 5; i++) {
+        result.kickers.push_back(allCards[i].rank);
+    }
     return result;
 }
 
 int PokerEngine::compareHands(HandRank& h1, HandRank& h2) {
-    if (h1.rank != h2.rank) return h1.rank > h2.rank ? 1 : -1;
+    if (h1.rank != h2.rank) {
+        return h1.rank > h2.rank ? 1 : -1;
+    }
     for (size_t i = 0; i < h1.kickers.size() && i < h2.kickers.size(); i++) {
-        if (h1.kickers[i] != h2.kickers[i]) return h1.kickers[i] > h2.kickers[i] ? 1 : -1;
+        if (h1.kickers[i] != h2.kickers[i]) {
+            return h1.kickers[i] > h2.kickers[i] ? 1 : -1;
+        }
     }
     return 0;
 }

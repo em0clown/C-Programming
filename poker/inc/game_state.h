@@ -14,12 +14,12 @@ public:
     Player p1, p2;
     int pot = 0;
     int currentBet = 0;
-    int roundStage = 0; 
-    int activePlayerNum = 1; 
-    int dealerNum = 2; 
+    int roundStage = 0;
+    int activePlayerNum = 1;
+    int dealerNum = 2;
     int lastRaiserNum = 1;
     bool roundActive = false;
-    bool cardsHidden = true; 
+    bool cardsHidden = true;
     std::string statusMessage = "Выберите режим игры в меню сверху!";
 
     GameState(void (*uiUpdater)());
@@ -32,4 +32,8 @@ public:
     void nextStage();
     void switchMode(GameMode mode);
     void startRound();
+
+    bool isAnyPlayerBroke();
+    bool canAffordAnte();
+    void resetGame();
 };

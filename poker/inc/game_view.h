@@ -8,13 +8,15 @@ public:
     static GtkWidget *drawingArea;
     static GtkWidget *statusLabel;
     static GtkWidget *moneyLabel;
+    static cairo_surface_t *background;
+    static int bgWidth;
+    static int bgHeight;
 
     static void init(GameState* gameState);
     static void updateUI();
     static void drawCard(cairo_t *cr, double x, double y, double w, double h, Card card, bool faceUp);
     static gboolean onDraw(GtkWidget *widget, cairo_t *cr, gpointer data);
 
-    // Коллбэки интерфейса
     static void onBotModeSelected(GtkWidget* w, gpointer p);
     static void onHotseatModeSelected(GtkWidget* w, gpointer p);
     static void onToggleCards(GtkWidget* w, gpointer p);

@@ -5,12 +5,12 @@
 enum GameMode { MENU, SINGLE_BOT, MULTI_HOTSEAT };
 
 struct Card {
-    int rank;  // 2-14 (11=J, 12=Q, 13=K, 14=A)
-    int suit;  // 0=♥, 1=♦, 2=♣, 3=♠
+    int rank;
+    int suit;
 };
 
 struct HandRank {
-    int rank;  // 1-9
+    int rank;
     std::vector<int> kickers;
     std::string name;
 };

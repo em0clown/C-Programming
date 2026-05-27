@@ -1,22 +1,24 @@
-cmake_minimum_required(VERSION 3.28)
-project(poker LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.14)
+project(Poker)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+set(SOURCES
+    src/main.cpp
+    src/game_state.cpp
+    src/game_view.cpp
+    src/poker_engine.cpp
+)
 
 add_executable(poker ${SOURCES})
 
-target_include_directories(poker PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+target_include_directories(poker PRIVATE inc ${GTK3_INCLUDE_DIRS})
+target_link_libraries(poker ${GTK3_LIBRARIES})
 
-target_link_libraries(poker PRIVATE PkgConfig::GTK3)
+file(COPY ${CMAKE_SOURCE_DIR}/src/table.png DESTINATION ${CMAKE_BINARY_DIR})
 
-if(MSVC)
-    target_compile_options(poker PRIVATE /W4)
-else()
-    target_compile_options(poker PRIVATE -Wall -Wextra -Wpedantic)
-endif()
+message(STATUS "Poker game with background and logs ready")

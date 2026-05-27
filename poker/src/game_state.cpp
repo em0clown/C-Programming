@@ -14,14 +14,16 @@ GameState::GameState(void (*uiUpdater)()) : updateUI_callback(uiUpdater) {
 void GameState::createDeck() {
     deck.clear();
     for (int s = 0; s < 4; s++) {
-        for (int r = 2; r <= 14; r++) deck.push_back(Card{r, s});
+        for (int r = 2; r <= 14; r++) {
+            deck.push_back(Card{r, s});
+        }
     }
 }
 
 void GameState::shuffleDeck() {
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(deck.begin(), deck.end(), g);
+    random_device rd;
+    mt19937 g(rd());
+    shuffle(deck.begin(), deck.end(), g);
 }
 
 Card GameState::dealCard() {
@@ -30,22 +32,59 @@ Card GameState::dealCard() {
     return c;
 }
 
+bool GameState::isAnyPlayerBroke() {
+    return (p1.money < 10) || (p2.money < 10);
+}
+
+bool GameState::canAffordAnte() {
+    return (p1.money >= 10 && p2.money >= 10);
+}
+
+void GameState::resetGame() {
+    p1.money = 1000;
+    p2.money = 1000;
+    p1.roundBet = 0;
+    p2.roundBet = 0;
+    pot = 0;
+    currentBet = 0;
+    roundActive = false;
+    p1.hand.clear();
+    p2.hand.clear();
+    community.clear();
+    p1.isFolded = false;
+    p2.isFolded = false;
+    roundStage = 0;
+    statusMessage = "Баланс всех игроков восстановлен до 1000 фишек. Нажмите НАЧАТЬ РАУНД.";
+    updateUI_callback();
+}
+
 void GameState::toggleActivePlayer() {
+    if (!roundActive) return;
+
     int nextPlayer = (activePlayerNum == 1) ? 2 : 1;
-    
+
     if (nextPlayer == lastRaiserNum && ((nextPlayer == 1 ? p1.roundBet : p2.roundBet) == currentBet)) {
         nextStage();
     } else {
         activePlayerNum = nextPlayer;
-        
+
         if (currentMode == MULTI_HOTSEAT) {
-            cardsHidden = true; 
+            cardsHidden = true;
             statusMessage = "Ход переходит к игроку " + to_string(activePlayerNum) + ". Подтвердите готовность!";
         } else if (currentMode == SINGLE_BOT && activePlayerNum == 2) {
-            cardsHidden = false; 
+            if (p2.money <= 0) {
+                roundActive = false;
+                p2.isFolded = true;
+                p1.money += pot;
+                statusMessage = "У бота закончились фишки! Игрок 1 выиграл банк! Нажмите НАЧАТЬ РАУНД.";
+                pot = 0;
+                updateUI_callback();
+                return;
+            }
+            cardsHidden = false;
             statusMessage = "Думает бот...";
             updateUI_callback();
-            executeBotTurn(); 
+            executeBotTurn();
             return;
         }
         updateUI_callback();
@@ -55,10 +94,30 @@ void GameState::toggleActivePlayer() {
 void GameState::executeBotTurn() {
     if (!roundActive) return;
 
+    if (p2.money <= 0) {
+        roundActive = false;
+        p2.isFolded = true;
+        p1.money += pot;
+        statusMessage = "У бота закончились фишки! Игрок 1 выиграл банк! Нажмите НАЧАТЬ РАУНД.";
+        pot = 0;
+        updateUI_callback();
+        return;
+    }
+
     HandRank botHand = PokerEngine::evaluateHand(p2.hand, community);
     int callAmount = currentBet - p2.roundBet;
 
-    if (roundStage == 0) { // Префлоп
+    if (callAmount > p2.money) {
+        roundActive = false;
+        p2.isFolded = true;
+        p1.money += pot;
+        statusMessage = "У бота недостаточно фишек для колла! Бот пасует. Вы забираете банк!";
+        pot = 0;
+        updateUI_callback();
+        return;
+    }
+
+    if (roundStage == 0) {
         int maxRank = max(p2.hand[0].rank, p2.hand[1].rank);
         if (maxRank < 7 && p2.hand[0].rank != p2.hand[1].rank && callAmount > 40) {
             roundActive = false;
@@ -70,33 +129,51 @@ void GameState::executeBotTurn() {
             int raiseValue = currentBet + 30;
             int added = raiseValue - p2.roundBet;
             if (p2.money >= added) {
-                p2.money -= added; pot += added;
-                p2.roundBet = raiseValue; currentBet = raiseValue;
+                p2.money -= added;
+                pot += added;
+                p2.roundBet = raiseValue;
+                currentBet = raiseValue;
                 lastRaiserNum = 2;
                 statusMessage = "Бот делает РЕЙЗ до $" + to_string(currentBet);
-            } else { goto bot_call; }
+            } else {
+                if (p2.money >= callAmount) {
+                    p2.money -= callAmount;
+                    pot += callAmount;
+                    p2.roundBet += callAmount;
+                    statusMessage = "Бот сыграл КОЛЛ/ЧЕК.";
+                }
+            }
         } else {
-            bot_call:
             if (p2.money >= callAmount) {
-                p2.money -= callAmount; pot += callAmount;
+                p2.money -= callAmount;
+                pot += callAmount;
                 p2.roundBet += callAmount;
                 statusMessage = "Бот сыграл КОЛЛ/ЧЕК.";
             }
         }
-    } else { // Постфлоп
-        if (botHand.rank >= 3) { 
+    } else {
+        if (botHand.rank >= 3) {
             int raiseValue = currentBet + 40;
             int added = raiseValue - p2.roundBet;
             if (p2.money >= added) {
-                p2.money -= added; pot += added;
-                p2.roundBet = raiseValue; currentBet = raiseValue;
+                p2.money -= added;
+                pot += added;
+                p2.roundBet = raiseValue;
+                currentBet = raiseValue;
                 lastRaiserNum = 2;
                 statusMessage = "Бот агрессивно поднимает (РЕЙЗ) до $" + to_string(currentBet);
-            } else { goto bot_call_post; }
-        } else if (botHand.rank == 2 || callAmount == 0) { 
-            bot_call_post:
+            } else {
+                if (p2.money >= callAmount) {
+                    p2.money -= callAmount;
+                    pot += callAmount;
+                    p2.roundBet += callAmount;
+                    statusMessage = "Бот поддерживает ставку (Колл/Чек).";
+                }
+            }
+        } else if (botHand.rank == 2 || callAmount == 0) {
             if (p2.money >= callAmount) {
-                p2.money -= callAmount; pot += callAmount;
+                p2.money -= callAmount;
+                pot += callAmount;
                 p2.roundBet += callAmount;
                 statusMessage = "Бот поддерживает ставку (Колл/Чек).";
             }
@@ -129,16 +206,22 @@ void GameState::nextStage() {
     roundStage++;
 
     if (roundStage == 1) {
-        dealCard(); community.push_back(dealCard()); community.push_back(dealCard()); community.push_back(dealCard());
+        dealCard();
+        community.push_back(dealCard());
+        community.push_back(dealCard());
+        community.push_back(dealCard());
         statusMessage = "Флоп открыт!";
     } else if (roundStage == 2) {
-        dealCard(); community.push_back(dealCard());
+        dealCard();
+        community.push_back(dealCard());
+        statusMessage = "Тёрн открыт!";
     } else if (roundStage == 3) {
-        dealCard(); community.push_back(dealCard());
+        dealCard();
+        community.push_back(dealCard());
         statusMessage = "Ривер открыт! Финальный раунд ставок.";
     } else if (roundStage == 4) {
         roundActive = false;
-        cardsHidden = false; 
+        cardsHidden = false;
 
         HandRank r1 = PokerEngine::evaluateHand(p1.hand, community);
         HandRank r2 = PokerEngine::evaluateHand(p2.hand, community);
@@ -146,10 +229,18 @@ void GameState::nextStage() {
         string p2Name = (currentMode == SINGLE_BOT) ? "Бот" : "Игрок 2";
         statusMessage = "Вскрытие! Игрок 1: " + r1.name + " | " + p2Name + ": " + r2.name;
         int res = PokerEngine::compareHands(r1, r2);
-        
-        if (res > 0) { p1.money += pot; statusMessage += " - ИГРОК 1 ПОБЕДИЛ!"; } 
-        else if (res < 0) { p2.money += pot; statusMessage += " - " + p2Name + " ПОБЕДИЛ!"; } 
-        else { p1.money += pot / 2; p2.money += pot / 2; statusMessage += " - НИЧЬЯ!"; }
+
+        if (res > 0) {
+            p1.money += pot;
+            statusMessage += " - ИГРОК 1 ПОБЕДИЛ!";
+        } else if (res < 0) {
+            p2.money += pot;
+            statusMessage += " - " + p2Name + " ПОБЕДИЛ!";
+        } else {
+            p1.money += pot / 2;
+            p2.money += pot / 2;
+            statusMessage += " - НИЧЬЯ!";
+        }
         pot = 0;
         updateUI_callback();
         return;
@@ -165,8 +256,10 @@ void GameState::switchMode(GameMode mode) {
     currentMode = mode;
     roundActive = false;
     community.clear();
-    p1.hand.clear(); p2.hand.clear();
-    pot = 0; currentBet = 0;
+    p1.hand.clear();
+    p2.hand.clear();
+    pot = 0;
+    currentBet = 0;
 
     if (mode == SINGLE_BOT) {
         statusMessage = "Режим: С ботом. Нажмите НАЧАТЬ РАУНД.";
@@ -178,23 +271,46 @@ void GameState::switchMode(GameMode mode) {
 
 void GameState::startRound() {
     if (currentMode == MENU) return;
-    if (p1.money < 10 || p2.money < 10) { p1.money = 1000; p2.money = 1000; }
 
-    createDeck(); shuffleDeck(); community.clear();
-    p1.hand.clear(); p2.hand.clear();
-    p1.isFolded = false; p2.isFolded = false;
+    if (!canAffordAnte()) {
+        if (p1.money < 10 && p2.money < 10) {
+            resetGame();
+        } else if (p1.money < 10) {
+            p1.money = 1000;
+            statusMessage = "Игрок 1 обанкротился! Баланс восстановлен до 1000 фишек. Нажмите НАЧАТЬ РАУНД.";
+        } else if (p2.money < 10) {
+            p2.money = 1000;
+            string p2Name = (currentMode == SINGLE_BOT) ? "Бот" : "Игрок 2";
+            statusMessage = p2Name + " обанкротился! Баланс восстановлен до 1000 фишек. Нажмите НАЧАТЬ РАУНД.";
+        }
+        updateUI_callback();
+        return;
+    }
 
-    p1.hand.push_back(dealCard()); p1.hand.push_back(dealCard());
-    p2.hand.push_back(dealCard()); p2.hand.push_back(dealCard());
+    createDeck();
+    shuffleDeck();
+    community.clear();
+    p1.hand.clear();
+    p2.hand.clear();
+    p1.isFolded = false;
+    p2.isFolded = false;
 
-    p1.money -= 10; p2.money -= 10;
-    p1.roundBet = 10; p2.roundBet = 10;
-    pot = 20; currentBet = 10;
+    p1.hand.push_back(dealCard());
+    p1.hand.push_back(dealCard());
+    p2.hand.push_back(dealCard());
+    p2.hand.push_back(dealCard());
+
+    p1.money -= 10;
+    p2.money -= 10;
+    p1.roundBet = 10;
+    p2.roundBet = 10;
+    pot = 20;
+    currentBet = 10;
 
     roundStage = 0;
     roundActive = true;
-    cardsHidden = (currentMode == MULTI_HOTSEAT); 
-    
+    cardsHidden = (currentMode == MULTI_HOTSEAT);
+
     dealerNum = (dealerNum == 1) ? 2 : 1;
     activePlayerNum = dealerNum;
     lastRaiserNum = activePlayerNum;
